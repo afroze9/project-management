@@ -1,7 +1,6 @@
 package com.afroze.projectmanagement.company.api.domain;
 
 import jakarta.persistence.*;
-import org.springframework.data.jpa.domain.AbstractAuditable;
 
 @Entity
 @Table(name = "company", indexes = {
@@ -9,7 +8,11 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 }, uniqueConstraints = {
         @UniqueConstraint(name = "uc_company_name", columnNames = {"name"})
 })
-public class Company extends AbstractAuditable<Company, Long> {
+public class Company extends Auditable<Long> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
 
@@ -29,5 +32,13 @@ public class Company extends AbstractAuditable<Company, Long> {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
