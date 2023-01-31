@@ -5,6 +5,12 @@ spring:
   application:
     name: pm-company-ws
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://afrozeprojectmanagement.us.auth0.com/.well-known/jwks.json
+
   datasource:
     url: jdbc:postgresql://localhost:5432/project_management_company
     username: developer
