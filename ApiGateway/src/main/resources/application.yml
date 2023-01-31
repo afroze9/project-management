@@ -1,0 +1,46 @@
+server:
+  port: ${PORT:8012}
+
+spring:
+  application:
+    name: pm-api-gateway
+
+  security:
+    oauth2:
+      client:
+        provider:
+          auth0:
+            token-uri: https://afrozeprojectmanagement.us.auth0.com/oauth/token
+            authorization-uri: https://afrozeprojectmanagement.us.auth0.com/authorize
+            user-info-uri: https://afrozeprojectmanagement.us.auth0.com/userinfo
+            user-name-attribute: preferred_username
+        registration:
+          auth0:
+            provider: auth0
+            client-id: KJvOlzWCP874sX26lSDEliAAioCBkzW1
+            client-secret: 3khZnllfMnnZtyCBEdcTq68ml39pnGB76PqK8aAywhowOLRoEKbDniOQxu4VSe3u
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/auth0"
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+          enabled: true
+      routes:
+        - id: company
+          uri: lb://company
+          predicates:
+            - Path=/company/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: beans,health,httptrace,info,metrics
