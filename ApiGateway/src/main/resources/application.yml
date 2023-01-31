@@ -5,22 +5,22 @@ spring:
   application:
     name: pm-api-gateway
 
-  security:
-    oauth2:
-      client:
-        provider:
-          auth0:
-            token-uri: https://afrozeprojectmanagement.us.auth0.com/oauth/token
-            authorization-uri: https://afrozeprojectmanagement.us.auth0.com/authorize
-            user-info-uri: https://afrozeprojectmanagement.us.auth0.com/userinfo
-            user-name-attribute: preferred_username
-        registration:
-          auth0:
-            provider: auth0
-            client-id: KJvOlzWCP874sX26lSDEliAAioCBkzW1
-            client-secret: 3khZnllfMnnZtyCBEdcTq68ml39pnGB76PqK8aAywhowOLRoEKbDniOQxu4VSe3u
-            authorization-grant-type: authorization_code
-            redirect-uri: "{baseUrl}/login/oauth2/code/auth0"
+#  security:
+#    oauth2:
+#      client:
+#        provider:
+#          auth0:
+#            token-uri: https://afrozeprojectmanagement.us.auth0.com/oauth/token
+#            authorization-uri: https://afrozeprojectmanagement.us.auth0.com/authorize
+#            user-info-uri: https://afrozeprojectmanagement.us.auth0.com/userinfo
+#            user-name-attribute: preferred_username
+#        registration:
+#          auth0:
+#            provider: auth0
+#            client-id: KJvOlzWCP874sX26lSDEliAAioCBkzW1
+#            client-secret: 3khZnllfMnnZtyCBEdcTq68ml39pnGB76PqK8aAywhowOLRoEKbDniOQxu4VSe3u
+#            authorization-grant-type: authorization_code
+#            redirect-uri: "{baseUrl}/login/oauth2/code/auth0"
 
   cloud:
     gateway:
@@ -38,9 +38,26 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 management:
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
   endpoints:
     web:
       exposure:
-        include: beans,health,httptrace,info,metrics
+        include: beans,health,httptrace,info,metrics,circuitbreakers,circuitbreakerevents
+
+logging:
+  level:
+    org:
+      springframework:
+        web: TRACE
+        security: TRACE
+info:
+  application:
+    name: ${spring.application.name}

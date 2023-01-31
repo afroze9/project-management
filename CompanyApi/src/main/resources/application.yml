@@ -5,12 +5,6 @@ spring:
   application:
     name: pm-company-ws
 
-  devtools:
-    livereload:
-      enabled: false
-    restart:
-      enabled: false
-
   datasource:
     url: jdbc:postgresql://localhost:5432/project_management_company
     username: developer
@@ -25,3 +19,32 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+management:
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: beans,health,httptrace,info,metrics,circuitbreakers,circuitbreakerevents
+
+logging:
+  level:
+    org:
+      springframework:
+        web: TRACE
+        security: TRACE
+
+info:
+  application:
+    name: ${spring.application.name}
