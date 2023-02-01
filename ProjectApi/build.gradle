@@ -7,7 +7,7 @@ plugins {
 group = 'com.afroze.projectmanagement'
 version = '0.0.1-SNAPSHOT'
 description = 'ProjectApi'
-sourceCompatibility = '19'
+java.sourceCompatibility = JavaVersion.VERSION_19
 
 repositories {
     mavenCentral()
