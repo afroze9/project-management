@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.afroze.projectmanagement'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '19'
+
+repositories {
+    mavenCentral()
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
