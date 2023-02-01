@@ -3,9 +3,10 @@ package com.afroze.projectmanagement.company.api.ui.controller;
 import com.afroze.projectmanagement.company.api.dto.CompanyDto;
 import com.afroze.projectmanagement.company.api.exception.CompanyAlreadyExistsException;
 import com.afroze.projectmanagement.company.api.exception.CompanyNotFoundException;
+import com.afroze.projectmanagement.company.api.security.Permissions;
 import com.afroze.projectmanagement.company.api.service.CompanyService;
-import com.afroze.projectmanagement.company.api.ui.model.CompanyResponseModel;
 import com.afroze.projectmanagement.company.api.ui.model.CompanyRequestModel;
+import com.afroze.projectmanagement.company.api.ui.model.CompanyResponseModel;
 import com.afroze.projectmanagement.company.api.ui.model.HttpResponseModel;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -13,6 +14,7 @@ import org.modelmapper.TypeToken;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +33,7 @@ public class CompanyController {
     }
 
     @GetMapping()
+    @PreAuthorize("hasAuthority('" + Permissions.READ_COMPANY + "')")
     public ResponseEntity<HttpResponseModel<List<CompanyResponseModel>>> getAll() {
         List<CompanyDto> companies = companyService.getCompanies();
         if(companies.size() == 0) {
@@ -42,6 +45,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{companyId}/")
+    @PreAuthorize("hasAuthority('" + Permissions.READ_COMPANY + "')")
     public ResponseEntity<HttpResponseModel<CompanyResponseModel>> getById(@PathVariable("companyId") int companyId) {
         try {
             CompanyDto company = companyService.getCompanyById(companyId);
@@ -53,6 +57,7 @@ public class CompanyController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasAuthority('" + Permissions.WRITE_COMPANY + "')")
     public ResponseEntity<HttpResponseModel<CompanyResponseModel>> create(@RequestBody @Valid CompanyRequestModel company) {
         CompanyDto dto = mapper.map(company, CompanyDto.class);
         try {
