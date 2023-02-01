@@ -5,30 +5,25 @@ spring:
   application:
     name: pm-api-gateway
 
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+          enabled: true
+      routes:
+        - id: company
+          uri: lb://pm-company-ws
+          predicates:
+            - Path=/company
+          filters:
+            - AuthorizationHeaderFilter
+
   security:
     oauth2:
-      client:
-        registration:
-          auth0:
-            provider: auth0
-            client-id: KJvOlzWCP874sX26lSDEliAAioCBkzW1
-            client-secret: 3khZnllfMnnZtyCBEdcTq68ml39pnGB76PqK8aAywhowOLRoEKbDniOQxu4VSe3u
-            authorization-grant-type: authorization_code
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-            scope: openid,profile,email,read:company
-        provider:
-          auth0:
-            token-uri: https://afrozeprojectmanagement.us.auth0.com/oauth/token
-            authorization-uri: https://afrozeprojectmanagement.us.auth0.com/authorize
-            user-info-uri: https://afrozeprojectmanagement.us.auth0.com/userinfo
-            user-name-attribute: preferred_username
-
-#  cloud:
-#    gateway:
-#      discovery:
-#        locator:
-#          lower-case-service-id: true
-#          enabled: true
+      resourceserver:
+        jwt:
+          issuer-uri: https://afrozeprojectmanagement.us.auth0.com/
 
 eureka:
   client:
@@ -52,8 +47,8 @@ logging:
   level:
     org:
       springframework:
-        web: TRACE
-        security: TRACE
+        web: DEBUG
+        security: DEBUG
 
 info:
   application:
