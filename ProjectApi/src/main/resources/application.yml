@@ -4,12 +4,28 @@ server:
 spring:
   application:
     name: pm-project-ws
+
   security:
     oauth2:
       resourceserver:
         jwt:
           jwk-set-uri: https://afrozeprojectmanagement.us.auth0.com/.well-known/jwks.json
           issuer-uri: https://afrozeprojectmanagement.us.auth0.com/
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/project_management_company
+    username: developer
+    password: dev123
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
 
 eureka:
   client:
