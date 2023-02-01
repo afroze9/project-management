@@ -78,18 +78,6 @@ public class CompanyServiceImpl implements CompanyService {
 
         return mapper.map(companyToUpdate, CompanyDto.class);
     }
-    /*
-    * @Override
-    public CompanyDto update(long companyId, CompanyDto companyDto) throws CompanyNotFoundException {
-        Optional<Company> companyToUpdate = companyRepository.findById(companyId);
-        if(companyToUpdate.isEmpty()) {
-            throw new CompanyNotFoundException(companyDto.getId());
-        }
-
-        companyRepository.updateNameAndTagsById(companyDto.getName(), companyDto.getTags(), companyId);
-
-        return mapper.map(companyToUpdate, CompanyDto.class);
-    }*/
 
     @Override
     public void delete(long companyId) {

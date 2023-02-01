@@ -7,7 +7,7 @@ import com.afroze.projectmanagement.company.api.security.Permissions;
 import com.afroze.projectmanagement.company.api.service.CompanyService;
 import com.afroze.projectmanagement.company.api.ui.model.CompanyRequestModel;
 import com.afroze.projectmanagement.company.api.ui.model.CompanyResponseModel;
-import com.afroze.projectmanagement.company.api.ui.model.HttpResponseModel;
+import com.afroze.projectmanagement.core.ui.model.HttpResponseModel;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;

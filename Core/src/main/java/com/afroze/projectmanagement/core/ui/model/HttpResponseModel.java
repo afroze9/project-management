@@ -1,4 +1,4 @@
-package com.afroze.projectmanagement.company.api.ui.model;
+package com.afroze.projectmanagement.core.ui.model;
 
 public class HttpResponseModel<T> {
     private T data;
