@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -28,19 +29,19 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<CompanyDto> getCompanies() {
+    public List<CompanyDto> getAll() {
         List<Company> companies = companyRepository.findAll();
         return mapper.map(companies, new TypeToken<List<CompanyDto>>(){}.getType());
     }
 
     @Override
-    public List<CompanyDto> getCompaniesWithTag(String tag) {
+    public List<CompanyDto> getAllByTag(String tag) {
         List<Company> companies = companyRepository.findCompaniesByTagsContainsIgnoreCase(tag);
         return mapper.map(companies, new TypeToken<List<CompanyDto>>(){}.getType());
     }
 
     @Override
-    public CompanyDto getCompanyById(long companyId) throws CompanyNotFoundException {
+    public CompanyDto getById(long companyId) throws CompanyNotFoundException {
         Company company = companyRepository.findById(companyId).orElse(null);
 
         if(company == null) {
@@ -50,7 +51,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyDto createCompany(CompanyDto companyDto) throws CompanyAlreadyExistsException {
+    public CompanyDto create(CompanyDto companyDto) throws CompanyAlreadyExistsException {
         Company companyWithSameName = companyRepository.findByName(companyDto.getName());
 
         if(companyWithSameName != null) {
@@ -61,5 +62,38 @@ public class CompanyServiceImpl implements CompanyService {
         companyRepository.save(company);
 
         return mapper.map(company, CompanyDto.class);
+    }
+
+    @Override
+    public CompanyDto update(long companyId, CompanyDto companyDto) throws CompanyNotFoundException {
+        Company companyToUpdate = companyRepository.findById(companyId).orElse(null);
+        if(companyToUpdate == null) {
+            throw new CompanyNotFoundException(companyDto.getId());
+        }
+
+        companyToUpdate.setName(companyDto.getName());
+        companyToUpdate.setTags(companyDto.getTags());
+
+        companyRepository.save(companyToUpdate);
+
+        return mapper.map(companyToUpdate, CompanyDto.class);
+    }
+    /*
+    * @Override
+    public CompanyDto update(long companyId, CompanyDto companyDto) throws CompanyNotFoundException {
+        Optional<Company> companyToUpdate = companyRepository.findById(companyId);
+        if(companyToUpdate.isEmpty()) {
+            throw new CompanyNotFoundException(companyDto.getId());
+        }
+
+        companyRepository.updateNameAndTagsById(companyDto.getName(), companyDto.getTags(), companyId);
+
+        return mapper.map(companyToUpdate, CompanyDto.class);
+    }*/
+
+    @Override
+    public void delete(long companyId) {
+        Optional<Company> companyToDelete = companyRepository.findById(companyId);
+        companyToDelete.ifPresent(companyRepository::delete);
     }
 }

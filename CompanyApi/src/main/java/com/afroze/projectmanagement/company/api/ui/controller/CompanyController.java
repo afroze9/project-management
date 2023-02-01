@@ -35,7 +35,7 @@ public class CompanyController {
     @GetMapping()
     @PreAuthorize("hasAuthority('" + Permissions.READ_COMPANY + "')")
     public ResponseEntity<HttpResponseModel<List<CompanyResponseModel>>> getAll() {
-        List<CompanyDto> companies = companyService.getCompanies();
+        List<CompanyDto> companies = companyService.getAll();
         if(companies.size() == 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -48,7 +48,7 @@ public class CompanyController {
     @PreAuthorize("hasAuthority('" + Permissions.READ_COMPANY + "')")
     public ResponseEntity<HttpResponseModel<CompanyResponseModel>> getById(@PathVariable("companyId") int companyId) {
         try {
-            CompanyDto company = companyService.getCompanyById(companyId);
+            CompanyDto company = companyService.getById(companyId);
             CompanyResponseModel response = mapper.map(company, CompanyResponseModel.class);
             return ResponseEntity.status(HttpStatus.OK).body(HttpResponseModel.Success(response));
         } catch (CompanyNotFoundException e) {
@@ -61,11 +61,31 @@ public class CompanyController {
     public ResponseEntity<HttpResponseModel<CompanyResponseModel>> create(@RequestBody @Valid CompanyRequestModel company) {
         CompanyDto dto = mapper.map(company, CompanyDto.class);
         try {
-            CompanyDto createdCompany = companyService.createCompany(dto);
+            CompanyDto createdCompany = companyService.create(dto);
             CompanyResponseModel response = mapper.map(createdCompany, CompanyResponseModel.class);
             return ResponseEntity.status(HttpStatus.CREATED).body(HttpResponseModel.Success(response));
         } catch (CompanyAlreadyExistsException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(HttpResponseModel.Failure(null, e.getLocalizedMessage()));
         }
+    }
+
+    @PutMapping("/{companyId}/")
+    @PreAuthorize("hasAuthority('" + Permissions.UPDATE_COMPANY + "')")
+    public ResponseEntity<HttpResponseModel<CompanyResponseModel>> update(@PathVariable("companyId") int companyId, @RequestBody @Valid CompanyRequestModel company) {
+        CompanyDto dto = mapper.map(company, CompanyDto.class);
+        try {
+            CompanyDto updatedCompany = companyService.update(companyId, dto);
+            CompanyResponseModel response = mapper.map(updatedCompany, CompanyResponseModel.class);
+            return ResponseEntity.status(HttpStatus.OK).body(HttpResponseModel.Success(response));
+        } catch (CompanyNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(HttpResponseModel.Failure(null, e.getLocalizedMessage()));
+        }
+    }
+
+    @DeleteMapping("/{companyId}/")
+    @PreAuthorize("hasAuthority('" + Permissions.DELETE_COMPANY + "')")
+    public ResponseEntity<HttpResponseModel<CompanyResponseModel>> delete(@PathVariable("companyId") int companyId) {
+        companyService.delete(companyId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 }

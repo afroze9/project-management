@@ -7,8 +7,10 @@ import com.afroze.projectmanagement.company.api.exception.CompanyNotFoundExcepti
 import java.util.List;
 
 public interface CompanyService {
-    List<CompanyDto> getCompanies();
-    List<CompanyDto> getCompaniesWithTag(String tag);
-    CompanyDto getCompanyById(long companyId) throws CompanyNotFoundException;
-    CompanyDto createCompany(CompanyDto company) throws CompanyAlreadyExistsException;
+    List<CompanyDto> getAll();
+    List<CompanyDto> getAllByTag(String tag);
+    CompanyDto getById(long companyId) throws CompanyNotFoundException;
+    CompanyDto create(CompanyDto companyDto) throws CompanyAlreadyExistsException;
+    CompanyDto update(long companyId, CompanyDto companyDto) throws CompanyNotFoundException;
+    void delete(long companyId);
 }
