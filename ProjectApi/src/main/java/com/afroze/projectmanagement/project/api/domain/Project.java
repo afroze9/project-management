@@ -1,5 +1,6 @@
 package com.afroze.projectmanagement.project.api.domain;
 
+import com.afroze.projectmanagement.project.api.data.Auditable;
 import jakarta.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -12,7 +13,7 @@ import java.util.Set;
         @Index(name = "idx_project_id", columnList = "id")
 })
 
-public class Project extends AbstractAuditable<Project, Long> {
+public class Project extends Auditable<String> {
 
     private String name;
 

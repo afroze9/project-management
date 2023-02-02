@@ -1,18 +1,18 @@
 package com.afroze.projectmanagement.company.api.dto;
 
 public class CompanyDto {
-    private long Id;
+    private long id;
 
     private String name;
 
     private String tags;
 
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        id = id;
     }
 
     public String getName() {

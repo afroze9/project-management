@@ -74,7 +74,9 @@ public class CompanyController {
 
     @PutMapping("/{companyId}/")
     @PreAuthorize("hasAuthority('" + Permissions.UPDATE_COMPANY + "')")
-    public ResponseEntity<HttpResponseModel<CompanyResponseModel>> update(@PathVariable("companyId") int companyId, @RequestBody @Valid CompanyRequestModel company) {
+    public ResponseEntity<HttpResponseModel<CompanyResponseModel>> update(
+            @PathVariable("companyId") long companyId,
+            @RequestBody @Valid CompanyRequestModel company) {
         CompanyDto dto = mapper.map(company, CompanyDto.class);
         try {
             CompanyDto updatedCompany = companyService.update(companyId, dto);

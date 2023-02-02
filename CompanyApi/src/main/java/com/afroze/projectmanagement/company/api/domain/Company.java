@@ -1,7 +1,7 @@
 package com.afroze.projectmanagement.company.api.domain;
 
+import com.afroze.projectmanagement.company.api.data.Auditable;
 import jakarta.persistence.*;
-import org.springframework.data.jpa.domain.AbstractAuditable;
 
 @Entity
 @Table(name = "company", indexes = {
@@ -9,8 +9,7 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 }, uniqueConstraints = {
         @UniqueConstraint(name = "uc_company_name", columnNames = {"name"})
 })
-public class Company extends AbstractAuditable<Company, Long> {
-
+public class Company extends Auditable<String, Long> {
     private String name;
 
     private String tags;

@@ -30,7 +30,6 @@ public class ProjectServiceImpl implements ProjectService {
         this.projectRepository = projectRepository;
         this.taskRepository = taskRepository;
         this.mapper = mapper;
-        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
     }
 
     @Override
@@ -42,7 +41,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     private static ProjectSummaryDto mapProjectDtoToProjectSummary(Project project) {
-        var summary = new ProjectSummaryDto();
+        ProjectSummaryDto summary = new ProjectSummaryDto();
         summary.setId(project.getId());
         summary.setTags(project.getTags());
         summary.setName(project.getName());
@@ -63,9 +62,10 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectDto create(ProjectDto projectDto) {
         Project project = mapper.map(projectDto, Project.class);
-        projectRepository.save(project);
+        Project savedProject = projectRepository.save(project);
+        ProjectDto mapped = mapper.map(savedProject, ProjectDto.class);
 
-        return mapper.map(project, ProjectDto.class);
+        return mapped;
     }
 
     @Override

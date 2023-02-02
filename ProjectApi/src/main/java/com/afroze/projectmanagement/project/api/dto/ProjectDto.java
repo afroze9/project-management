@@ -3,7 +3,7 @@ package com.afroze.projectmanagement.project.api.dto;
 import java.util.List;
 
 public class ProjectDto {
-    private long Id;
+    private Long id;
 
     private String name;
 
@@ -11,12 +11,12 @@ public class ProjectDto {
 
     private List<TaskDto> tasks;
 
-    public long getId() {
-        return Id;
+    public Long getId() {
+        return id;
     }
 
-    public void setId(long id) {
-        Id = id;
+    public void setId(Long id) {
+        id = id;
     }
 
     public String getName() {

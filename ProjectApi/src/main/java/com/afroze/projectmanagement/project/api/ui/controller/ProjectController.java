@@ -1,5 +1,7 @@
 package com.afroze.projectmanagement.project.api.ui.controller;
 
+import com.afroze.projectmanagement.project.api.data.Auditable;
+import com.afroze.projectmanagement.project.api.domain.Project;
 import com.afroze.projectmanagement.project.api.dto.ProjectDto;
 import com.afroze.projectmanagement.project.api.dto.ProjectSummaryDto;
 import com.afroze.projectmanagement.project.api.dto.TaskDto;
@@ -26,7 +28,6 @@ public class ProjectController {
     public ProjectController(ProjectService projectService, ModelMapper mapper) {
         this.projectService = projectService;
         this.mapper = mapper;
-        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
 
     @GetMapping

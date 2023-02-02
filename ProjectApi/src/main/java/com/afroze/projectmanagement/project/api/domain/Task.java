@@ -1,7 +1,7 @@
 package com.afroze.projectmanagement.project.api.domain;
 
+import com.afroze.projectmanagement.project.api.data.Auditable;
 import jakarta.persistence.*;
-import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import java.math.BigDecimal;
 
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Table(name = "task", indexes = {
         @Index(name = "idx_task_id", columnList = "id")
 })
-public class Task extends AbstractAuditable<Task, Long> {
+public class Task extends Auditable<String> {
     private String name;
     private String description;
     private BigDecimal estimatedEffort;
