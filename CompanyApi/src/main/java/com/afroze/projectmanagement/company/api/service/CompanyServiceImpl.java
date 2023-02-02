@@ -59,9 +59,9 @@ public class CompanyServiceImpl implements CompanyService {
         }
 
         Company company = mapper.map(companyDto, Company.class);
-        companyRepository.save(company);
+        Company createdCompany = companyRepository.save(company);
 
-        return mapper.map(company, CompanyDto.class);
+        return mapper.map(createdCompany, CompanyDto.class);
     }
 
     @Override

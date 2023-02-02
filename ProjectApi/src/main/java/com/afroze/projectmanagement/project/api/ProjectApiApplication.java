@@ -1,9 +1,6 @@
 package com.afroze.projectmanagement.project.api;
 
 import com.afroze.projectmanagement.project.api.data.SpringSecurityAuditorAware;
-import com.afroze.projectmanagement.project.api.data.Auditable;
-import com.afroze.projectmanagement.project.api.domain.Project;
-import com.afroze.projectmanagement.project.api.dto.ProjectDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,9 +18,6 @@ public class ProjectApiApplication {
 
 	@Bean
 	public ModelMapper modelMapper() {
-		ModelMapper mapper = new ModelMapper();
-		mapper.typeMap(Project.class, ProjectDto.class)
-				.addMapping(Auditable::getId, ProjectDto::setId);
 		return new ModelMapper();
 	}
 

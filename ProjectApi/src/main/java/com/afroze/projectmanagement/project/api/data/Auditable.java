@@ -7,19 +7,21 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @param <U> The type for auditors (users)
+ * @param <PK> The type for the id
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class Auditable<U> {
+public abstract class Auditable<U, PK extends Serializable> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private PK id;
 
     @Column(name = "created_on", nullable = false)
     @CreatedDate
@@ -37,11 +39,11 @@ public abstract class Auditable<U> {
     @LastModifiedBy
     private U modifiedBy;
 
-    public Long getId() {
+    public PK getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(PK id) {
         this.id = id;
     }
 

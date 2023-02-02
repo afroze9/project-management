@@ -9,14 +9,13 @@ import java.math.BigDecimal;
 @Table(name = "task", indexes = {
         @Index(name = "idx_task_id", columnList = "id")
 })
-public class Task extends Auditable<String> {
+public class Task extends Auditable<String, Long> {
     private String name;
     private String description;
     private BigDecimal estimatedEffort;
     private BigDecimal actualEffort;
     private boolean isComplete;
     private long userId;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
