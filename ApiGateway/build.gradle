@@ -6,7 +6,7 @@ plugins {
 group = 'com.afroze.projectmanagement'
 version = '0.0.1-SNAPSHOT'
 description = 'ApiGateway'
-java.sourceCompatibility = JavaVersion.VERSION_19
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
