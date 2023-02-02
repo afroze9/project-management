@@ -17,6 +17,8 @@ public class SecurityConfig {
                 .cors().disable()
                 .authorizeHttpRequests(a -> a.requestMatchers("/actuator").permitAll())
                 .authorizeHttpRequests(a -> a.requestMatchers("/actuator/**").permitAll())
+                .authorizeHttpRequests(a -> a.requestMatchers("/project").permitAll())
+                .authorizeHttpRequests(a -> a.requestMatchers("/project/**").permitAll())
                 .authorizeHttpRequests(a -> a.requestMatchers("/**").authenticated())
                 .oauth2ResourceServer()
                 .jwt();

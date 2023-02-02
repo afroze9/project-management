@@ -1,9 +1,13 @@
 package com.afroze.projectmanagement.project.api.service;
 
 import com.afroze.projectmanagement.project.api.domain.Project;
+import com.afroze.projectmanagement.project.api.domain.Task;
 import com.afroze.projectmanagement.project.api.dto.ProjectDto;
+import com.afroze.projectmanagement.project.api.dto.ProjectSummaryDto;
+import com.afroze.projectmanagement.project.api.dto.TaskDto;
 import com.afroze.projectmanagement.project.api.exception.ProjectNotFoundException;
 import com.afroze.projectmanagement.project.api.repository.ProjectRepository;
+import com.afroze.projectmanagement.project.api.repository.TaskRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.modelmapper.convention.MatchingStrategies;
@@ -12,43 +16,56 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
-
+    private final TaskRepository taskRepository;
     private final ModelMapper mapper;
 
     @Autowired
-    public ProjectServiceImpl(ProjectRepository projectRepository, ModelMapper mapper) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, TaskRepository taskRepository, ModelMapper mapper) {
         this.projectRepository = projectRepository;
+        this.taskRepository = taskRepository;
         this.mapper = mapper;
-        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
     }
 
     @Override
-    public List<ProjectDto> getAll() {
-        List<Project> companies = projectRepository.findAll();
-        return mapper.map(companies, new TypeToken<List<ProjectDto>>(){}.getType());
+    public List<ProjectSummaryDto> getAll() {
+        return projectRepository.findAll()
+                .stream()
+                .map(ProjectServiceImpl::mapProjectDtoToProjectSummary)
+                .collect(Collectors.toList());
+    }
+
+    private static ProjectSummaryDto mapProjectDtoToProjectSummary(Project project) {
+        var summary = new ProjectSummaryDto();
+        summary.setId(project.getId());
+        summary.setTags(project.getTags());
+        summary.setName(project.getName());
+        summary.setTaskCount(project.getTasks().size());
+        return summary;
     }
 
     @Override
     public ProjectDto getById(long projectId) throws ProjectNotFoundException {
-        Project company = projectRepository.findById(projectId).orElse(null);
+        Project project = projectRepository.findById(projectId).orElse(null);
 
-        if(company == null) {
+        if(project == null) {
             throw new ProjectNotFoundException(projectId);
         }
-        return mapper.map(company, ProjectDto.class);
+        return mapper.map(project, ProjectDto.class);
     }
 
     @Override
     public ProjectDto create(ProjectDto projectDto) {
-        Project company = mapper.map(projectDto, Project.class);
-        projectRepository.save(company);
+        Project project = mapper.map(projectDto, Project.class);
+        projectRepository.save(project);
 
-        return mapper.map(company, ProjectDto.class);
+        return mapper.map(project, ProjectDto.class);
     }
 
     @Override
@@ -68,7 +85,28 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void delete(long projectId) {
-        Optional<Project> companyToDelete = projectRepository.findById(projectId);
-        companyToDelete.ifPresent(projectRepository::delete);
+        Optional<Project> projectToDelete = projectRepository.findById(projectId);
+        projectToDelete.ifPresent(projectRepository::delete);
+    }
+
+    @Override
+    public ProjectDto addTasksToProject(long projectId, List<TaskDto> taskDtos) throws ProjectNotFoundException {
+        Project projectToUpdate = projectRepository.findById(projectId).orElse(null);
+        if(projectToUpdate == null) {
+            throw new ProjectNotFoundException(projectId);
+        }
+
+        List<Task> tasksToAdd =  mapper.map(taskDtos, new TypeToken<List<Task>>(){}.getType());
+
+        for (var task : tasksToAdd) {
+            task.setProject(projectToUpdate);
+            taskRepository.save(task);
+        }
+
+        List<TaskDto> addedTasks =  mapper.map(tasksToAdd, new TypeToken<List<TaskDto>>(){}.getType());
+        ProjectDto updatedProject = mapper.map(projectToUpdate, ProjectDto.class);
+        updatedProject.setTasks(addedTasks);
+
+        return updatedProject;
     }
 }

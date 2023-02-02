@@ -1,22 +1,20 @@
 package com.afroze.projectmanagement.project.api.dto;
 
-import java.util.List;
-
-public class ProjectDto {
-    private long Id;
+public class ProjectSummaryDto {
+    private long id;
 
     private String name;
 
     private String tags;
 
-    private List<TaskDto> tasks;
+    private long taskCount;
 
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -35,11 +33,11 @@ public class ProjectDto {
         this.tags = tags;
     }
 
-    public List<TaskDto> getTasks() {
-        return tasks;
+    public long getTaskCount() {
+        return taskCount;
     }
 
-    public void setTasks(List<TaskDto> tasks) {
-        this.tasks = tasks;
+    public void setTaskCount(long taskCount) {
+        this.taskCount = taskCount;
     }
 }

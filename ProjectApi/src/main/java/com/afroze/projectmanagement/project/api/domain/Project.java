@@ -1,9 +1,11 @@
 package com.afroze.projectmanagement.project.api.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Index;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.data.jpa.domain.AbstractAuditable;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "project", indexes = {
@@ -15,6 +17,10 @@ public class Project extends AbstractAuditable<Project, Long> {
     private String name;
 
     private String tags;
+
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.EXTRA)
+    private Set<Task> tasks;
 
     public String getName() {
         return name;
@@ -30,5 +36,13 @@ public class Project extends AbstractAuditable<Project, Long> {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 }

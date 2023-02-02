@@ -1,22 +1,22 @@
-package com.afroze.projectmanagement.project.api.dto;
+package com.afroze.projectmanagement.project.api.ui.model;
 
 import java.util.List;
 
-public class ProjectDto {
-    private long Id;
+public class ProjectResponseModel {
+    private long id;
 
     private String name;
 
     private String tags;
 
-    private List<TaskDto> tasks;
+    private List<TaskResponseModel> tasks;
 
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -35,11 +35,11 @@ public class ProjectDto {
         this.tags = tags;
     }
 
-    public List<TaskDto> getTasks() {
+    public List<TaskResponseModel> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<TaskDto> tasks) {
+    public void setTasks(List<TaskResponseModel> tasks) {
         this.tasks = tasks;
     }
 }
