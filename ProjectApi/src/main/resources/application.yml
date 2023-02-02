@@ -13,7 +13,7 @@ spring:
           issuer-uri: https://afrozeprojectmanagement.us.auth0.com/
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/project_management_company
+    url: jdbc:postgresql://localhost:5432/project_management_project
     username: developer
     password: dev123
 

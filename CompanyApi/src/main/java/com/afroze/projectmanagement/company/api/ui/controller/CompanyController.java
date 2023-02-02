@@ -8,6 +8,8 @@ import com.afroze.projectmanagement.company.api.service.CompanyService;
 import com.afroze.projectmanagement.company.api.ui.model.CompanyRequestModel;
 import com.afroze.projectmanagement.company.api.ui.model.CompanyResponseModel;
 import com.afroze.projectmanagement.company.api.ui.model.HttpResponseModel;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -34,6 +36,7 @@ public class CompanyController {
 
     @GetMapping()
     @PreAuthorize("hasAuthority('" + Permissions.READ_COMPANY + "')")
+    @Operation(summary = "Get Companies", security = @SecurityRequirement(name="bearerAuth"))
     public ResponseEntity<HttpResponseModel<List<CompanyResponseModel>>> getAll() {
         List<CompanyDto> companies = companyService.getAll();
         if(companies.size() == 0) {
