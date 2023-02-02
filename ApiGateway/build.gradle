@@ -23,6 +23,8 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
     implementation 'org.springframework.security:spring-security-oauth2-jose:6.0.1'
     implementation 'com.google.code.gson:gson:2.9.1'
+    implementation 'com.tngtech.archunit:archunit-junit5-api:1.0.0'
+    implementation 'com.tngtech.archunit:archunit-junit5-engine:1.0.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:3.0.2'
 }
 

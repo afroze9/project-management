@@ -27,6 +27,8 @@ dependencies {
     implementation 'org.springframework.security:spring-security-oauth2-jose'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
     implementation 'org.springdoc:springdoc-openapi-starter-common:2.0.2'
+    implementation 'com.tngtech.archunit:archunit-junit5-api:1.0.0'
+    implementation 'com.tngtech.archunit:archunit-junit5-engine:1.0.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 }
