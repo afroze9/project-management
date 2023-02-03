@@ -3,9 +3,8 @@ package com.afroze.projectmanagement.company.api.repository;
 import com.afroze.projectmanagement.company.api.domain.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface CompanyRepository extends JpaRepository<Company, Long> {
-    Company findByName(String name);
-    List<Company> findCompaniesByTagsContainsIgnoreCase(String tag);
+    Optional<Company> findByName(String name);
 }

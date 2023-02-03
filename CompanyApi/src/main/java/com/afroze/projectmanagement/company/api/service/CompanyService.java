@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface CompanyService {
     List<CompanyDto> getAll();
-    List<CompanyDto> getAllByTag(String tag);
     CompanyDto getById(long companyId) throws CompanyNotFoundException;
     CompanyDto create(CompanyDto companyDto) throws CompanyAlreadyExistsException;
     CompanyDto update(long companyId, CompanyDto companyDto) throws CompanyNotFoundException;

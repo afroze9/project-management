@@ -1,32 +1,20 @@
 package com.afroze.projectmanagement.company.api.ui.model;
 
 public class HttpResponseModel<T> {
-    private T data;
-    private boolean isError;
-    private String errorMessage;
+    private final T data;
+    private final boolean isError;
+    private final String errorMessage;
 
     public T getData() {
         return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
     }
 
     public boolean isError() {
         return isError;
     }
 
-    public void setError(boolean error) {
-        isError = error;
-    }
-
     public String getErrorMessage() {
         return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
     }
 
     protected HttpResponseModel(T data, boolean isError, String errorMessage) {

@@ -35,12 +35,6 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<CompanyDto> getAllByTag(String tag) {
-        List<Company> companies = companyRepository.findCompaniesByTagsContainsIgnoreCase(tag);
-        return mapper.map(companies, new TypeToken<List<CompanyDto>>(){}.getType());
-    }
-
-    @Override
     public CompanyDto getById(long companyId) throws CompanyNotFoundException {
         Company company = companyRepository.findById(companyId).orElse(null);
 
@@ -52,7 +46,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDto create(CompanyDto companyDto) throws CompanyAlreadyExistsException {
-        Company companyWithSameName = companyRepository.findByName(companyDto.getName());
+        Company companyWithSameName = companyRepository
+                .findByName(companyDto.getName()).orElse(null);
 
         if(companyWithSameName != null) {
             throw new CompanyAlreadyExistsException(companyWithSameName);
