@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8012}
+  port: ${API_GATEWAY_PORT:8012}
 
 spring:
   application:
@@ -17,13 +17,13 @@ spring:
           predicates:
             - Path=/company
           filters:
-            - AuthorizationHeaderFilter
+#            - AuthorizationHeaderFilter
         - id: company-endpoints
           uri: lb://pm-company-ws
           predicates:
             - Path=/company/**
           filters:
-            - AuthorizationHeaderFilter
+#            - AuthorizationHeaderFilter
 
         - id: project
           uri: lb://pm-project-ws

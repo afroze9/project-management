@@ -1,0 +1,62 @@
+services:
+  company-api:
+    container_name: company-api
+    image: company-api:${VERSION}
+    build:
+      context: CompanyApi
+      dockerfile: dockerfile
+    ports:
+      - ${COMPANY_API_PORT}:${COMPANY_API_PORT}
+    networks:
+      - project-management-network
+    environment:
+      server.port: ${COMPANY_API_PORT}
+      spring.datasource.url: jdbc:postgresql://company-db:${COMPANY_DB_PORT}/${COMPANY_DB_NAME}
+      eureka.client.serviceUrl.defaultZone: http://${DISCOVERY_SERVER_HOSTNAME}:${DISCOVERY_SERVER_PORT}/eureka/
+
+  api-gateway:
+    container_name: api-gateway
+    image: api-gateway:${VERSION}
+    build:
+      context: ApiGateway
+      dockerfile: dockerfile
+    ports:
+      - ${API_GATEWAY_PORT}:${API_GATEWAY_PORT}
+    networks:
+      - project-management-network
+    environment:
+      server.port: ${API_GATEWAY_PORT}
+      eureka.client.serviceUrl.defaultZone: http://${DISCOVERY_SERVER_HOSTNAME}:${DISCOVERY_SERVER_PORT}/eureka/
+
+  discovery-server:
+    container_name: discovery-server
+    image: discovery-server:${VERSION}
+    build:
+      context: DiscoveryServer
+      dockerfile: dockerfile
+    ports:
+      - ${DISCOVERY_SERVER_PORT}:${DISCOVERY_SERVER_PORT}
+    networks:
+      - project-management-network
+
+  company-db:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=${COMPANY_DB_USER}
+      - POSTGRES_PASSWORD=${COMPANY_DB_PASSWORD}
+      - POSTGRES_DB=${COMPANY_DB_NAME}
+    ports:
+      - ${COMPANY_DB_PORT}:5432
+    volumes:
+      - //C/tools/project-data/projectmanagement:/var/lib/postgresql/data
+    networks:
+      - project-management-network
+
+networks:
+  project-management-network:
+    driver: bridge
+
+#volumes:
+#  company-db-vol:
+#    driver: local
