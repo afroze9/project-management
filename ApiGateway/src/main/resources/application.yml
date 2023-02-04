@@ -7,6 +7,17 @@ spring:
 
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: '*'
+            allowedHeaders: '*'
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
       discovery:
         locator:
           lower-case-service-id: true
@@ -17,13 +28,13 @@ spring:
           predicates:
             - Path=/company
           filters:
-#            - AuthorizationHeaderFilter
+            - AuthorizationHeaderFilter
         - id: company-endpoints
           uri: lb://pm-company-ws
           predicates:
             - Path=/company/**
           filters:
-#            - AuthorizationHeaderFilter
+            - AuthorizationHeaderFilter
 
         - id: project
           uri: lb://pm-project-ws
