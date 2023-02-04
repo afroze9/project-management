@@ -1,10 +1,11 @@
 import { Auth0Provider } from '@auth0/auth0-react';
-import * as React from 'react';
-import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
-import theme from './theme';
+import * as React from 'react';
+import ReactDOM from 'react-dom/client';
+
 import App from './App';
+import theme from './theme';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

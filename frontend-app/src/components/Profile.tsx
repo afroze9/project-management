@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
 import { Auth0ContextInterface, useAuth0 } from '@auth0/auth0-react';
 import { Box } from '@mui/material';
+import { useEffect, useState } from 'react';
+
 import { ApplicationUser } from '../types/ApplicationUser';
 
 const Profile = () => {

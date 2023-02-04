@@ -1,18 +1,20 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AddTaskIcon from '@mui/icons-material/AddTask';
 import { Auth0ContextInterface, useAuth0 } from '@auth0/auth0-react';
+import AddTaskIcon from '@mui/icons-material/AddTask';
+import MenuIcon from '@mui/icons-material/Menu';
+import AppBar from '@mui/material/AppBar';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import * as React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+
 import { ApplicationUser } from '../types/ApplicationUser';
 
 const pages = ['Companies', 'Products'];
@@ -64,42 +66,44 @@ function ResponsiveAppBar() {
             Project Management
           </Typography>
 
-            { isAuthenticated && <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>}
+          {isAuthenticated && (
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                {pages.map((page) => (
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          )}
           <AddTaskIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -119,17 +123,37 @@ function ResponsiveAppBar() {
           >
             Project Management
           </Typography>
-            {<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {isAuthenticated && pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {isAuthenticated && (
+              <>
+                <Button
+                  key="companies-page"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  component={RouterLink}
+                  to="/companies"
+                >
+                  Companies
+                </Button>
+                <Button
+                  key="products-page"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  component={RouterLink}
+                  to="/products"
+                >
+                  Products
+                </Button>
+              </>
+            )}
+            {/*{isAuthenticated && pages.map((page) => (*/}
+            {/*  <Button*/}
+            {/*    key={page}*/}
+            {/*    onClick={handleCloseNavMenu}*/}
+            {/*    sx={{ my: 2, color: 'white', display: 'block' }}*/}
+            {/*  >*/}
+            {/*    {page}*/}
+            {/*  </Button>*/}
+            {/*))}*/}
+          </Box>
 
           {isAuthenticated ? (
             <Box sx={{ flexGrow: 0 }}>
