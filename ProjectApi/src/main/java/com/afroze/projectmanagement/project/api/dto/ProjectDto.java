@@ -11,6 +11,8 @@ public class ProjectDto {
 
     private List<TaskDto> tasks;
 
+    private long companyId;
+
     public long getId() {
         return id;
     }
@@ -41,5 +43,13 @@ public class ProjectDto {
 
     public void setTasks(List<TaskDto> tasks) {
         this.tasks = tasks;
+    }
+
+    public long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(long companyId) {
+        this.companyId = companyId;
     }
 }

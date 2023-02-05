@@ -22,6 +22,8 @@ public class Project extends Auditable<String, Long> {
     @LazyCollection(LazyCollectionOption.EXTRA)
     private Set<Task> tasks;
 
+    private long companyId;
+
     public String getName() {
         return name;
     }
@@ -44,5 +46,13 @@ public class Project extends Auditable<String, Long> {
 
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(long companyId) {
+        this.companyId = companyId;
     }
 }

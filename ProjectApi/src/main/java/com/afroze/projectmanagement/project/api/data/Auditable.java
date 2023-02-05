@@ -13,15 +13,16 @@ import java.util.Date;
 /**
  *
  * @param <U> The type for auditors (users)
- * @param <PK> The type for the id
+ * @param <K> The type for the entity id
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class Auditable<U, PK extends Serializable> {
+public abstract class Auditable<U, K extends Serializable> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private PK id;
+    private K id;
 
     @Column(name = "created_on", nullable = false)
     @CreatedDate
@@ -39,11 +40,11 @@ public abstract class Auditable<U, PK extends Serializable> {
     @LastModifiedBy
     private U modifiedBy;
 
-    public PK getId() {
+    public K getId() {
         return id;
     }
 
-    public void setId(PK id) {
+    public void setId(K id) {
         this.id = id;
     }
 

@@ -9,6 +9,8 @@ public class ProjectSummaryResponseModel {
 
     private long taskCount;
 
+    private long companyId;
+
     public long getId() {
         return id;
     }
@@ -39,5 +41,13 @@ public class ProjectSummaryResponseModel {
 
     public void setTaskCount(long taskCount) {
         this.taskCount = taskCount;
+    }
+
+    public long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(long companyId) {
+        this.companyId = companyId;
     }
 }

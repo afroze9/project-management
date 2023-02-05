@@ -5,6 +5,8 @@ public class ProjectRequestModel {
 
     private String tags;
 
+    private long companyId;
+
     public String getName() {
         return name;
     }
@@ -19,5 +21,13 @@ public class ProjectRequestModel {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(long companyId) {
+        this.companyId = companyId;
     }
 }

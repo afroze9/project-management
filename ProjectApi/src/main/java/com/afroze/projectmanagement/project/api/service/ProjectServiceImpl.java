@@ -5,6 +5,7 @@ import com.afroze.projectmanagement.project.api.domain.Task;
 import com.afroze.projectmanagement.project.api.dto.ProjectDto;
 import com.afroze.projectmanagement.project.api.dto.ProjectSummaryDto;
 import com.afroze.projectmanagement.project.api.dto.TaskDto;
+import com.afroze.projectmanagement.project.api.exception.ProjectAlreadyExistsException;
 import com.afroze.projectmanagement.project.api.exception.ProjectNotFoundException;
 import com.afroze.projectmanagement.project.api.repository.ProjectRepository;
 import com.afroze.projectmanagement.project.api.repository.TaskRepository;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -36,7 +36,7 @@ public class ProjectServiceImpl implements ProjectService {
         return projectRepository.findAll()
                 .stream()
                 .map(ProjectServiceImpl::mapProjectDtoToProjectSummary)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private static ProjectSummaryDto mapProjectDtoToProjectSummary(Project project) {
@@ -44,6 +44,7 @@ public class ProjectServiceImpl implements ProjectService {
         summary.setId(project.getId());
         summary.setTags(project.getTags());
         summary.setName(project.getName());
+        summary.setCompanyId(project.getCompanyId());
         summary.setTaskCount(project.getTasks().size());
         return summary;
     }
@@ -59,7 +60,15 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectDto create(ProjectDto projectDto) {
+    public ProjectDto create(ProjectDto projectDto) throws ProjectAlreadyExistsException {
+        Project existingProject = projectRepository
+                .findByCompanyIdAndName(projectDto.getCompanyId(), projectDto.getName())
+                .orElse(null);
+
+        if(existingProject != null) {
+            throw new ProjectAlreadyExistsException(existingProject);
+        }
+
         Project project = mapper.map(projectDto, Project.class);
         Project savedProject = projectRepository.save(project);
 
@@ -106,5 +115,14 @@ public class ProjectServiceImpl implements ProjectService {
         updatedProject.setTasks(addedTasks);
 
         return updatedProject;
+    }
+
+    @Override
+    public List<ProjectSummaryDto> getAllByCompanyId(int companyId) {
+
+        return projectRepository.findAllByCompanyId(companyId)
+                .stream()
+                .map(ProjectServiceImpl::mapProjectDtoToProjectSummary)
+                .toList();
     }
 }

@@ -29,6 +29,14 @@ spring:
             - Path=/company
           filters:
             - AuthorizationHeaderFilter
+
+        - id: company-project
+          uri: lb://pm-project-ws
+          predicates:
+            - Path=/company/*/projects/**
+          filters:
+            - AuthorizationHeaderFilter
+
         - id: company-endpoints
           uri: lb://pm-company-ws
           predicates:

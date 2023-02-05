@@ -1,0 +1,404 @@
+{
+	"info": {
+		"_postman_id": "c6091d7a-f21b-4169-8e12-c1feaa459fd1",
+		"name": "Project Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22947257"
+	},
+	"item": [
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "Get Companies",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/company",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Company",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Company B\",\r\n    \"tags\": \"blekh,super nice\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{port}}/company",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Company",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Company A\",\r\n    \"tags\": \"coolest,weirder\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{port}}/company/1/",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"company",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Company By Id",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/company/1/",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"company",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Company",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/company/1/",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"company",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "Get Projects",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/project",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Project B\",\r\n    \"tags\": \"blekh,super nice\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{port}}/project",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Tasks",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tasks\": [{\r\n        \"name\":\"Task A\",\r\n        \"description\": \"Description A\",\r\n        \"estimatedEffort\": 12.34\r\n    }, {\r\n        \"name\":\"Task B\",\r\n        \"description\": \"Description B\",\r\n        \"estimatedEffort\": 12.34\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:34036/project/1/tasks",
+							"host": [
+								"localhost"
+							],
+							"port": "34036",
+							"path": [
+								"project",
+								"1",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"client_id\":\"KJvOlzWCP874sX26lSDEliAAioCBkzW1\",\r\n    \"client_secret\": \"3khZnllfMnnZtyCBEdcTq68ml39pnGB76PqK8aAywhowOLRoEKbDniOQxu4VSe3u\",\r\n    \"audience\":\"company\",\r\n    \"grant_type\":\"client_credentials\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://afrozeprojectmanagement.us.auth0.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"afrozeprojectmanagement",
+						"us",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImNGNEFRZWN6Uk5sOERtd3IxYmFibCJ9.eyJpc3MiOiJodHRwczovL2Fmcm96ZXByb2plY3RtYW5hZ2VtZW50LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJLSnZPbHpXQ1A4NzRzWDI2bFNERWxpQUFpb0NCa3pXMUBjbGllbnRzIiwiYXVkIjoiY29tcGFueSIsImlhdCI6MTY3NTQ0MDk4NiwiZXhwIjoxNjc1NTI3Mzg2LCJhenAiOiJLSnZPbHpXQ1A4NzRzWDI2bFNERWxpQUFpb0NCa3pXMSIsInNjb3BlIjoicmVhZDpjb21wYW55IHdyaXRlOmNvbXBhbnkgdXBkYXRlOmNvbXBhbnkgZGVsZXRlOmNvbXBhbnkiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.eJgBrymAp7898rF3xAtU8R8P_hEEUVbCZ2uAciNnIyfrAhQYJHS7Rw0--j93uTJWlbwS2SuQ13Rb-LCb6TSBrmBbH0FSTW5kpeqtMYUTCRK57rfKczq32NPTDus4FpIqme6QsntmisZDUFndFw5JcGopaHRVxxOlAIo64rV_7FWG9HMauP5j2yXgfCm80dmKpt6RvdROjTgUm6wFf8moVvW3Ev9PIzuRYGCzCyCwYv3bn3oeCUi4y8tue2UK0jIqJipI0sULe1Vgr3CvOMRdyUXTb616s2DUU6CLC_VJWYG5pahD0o4-sfV4Kg45yHCW0Y6acsYzLvXX27lsTe1nrw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "port",
+			"value": "3950",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImNGNEFRZWN6Uk5sOERtd3IxYmFibCJ9.eyJpc3MiOiJodHRwczovL2Fmcm96ZXByb2plY3RtYW5hZ2VtZW50LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJLSnZPbHpXQ1A4NzRzWDI2bFNERWxpQUFpb0NCa3pXMUBjbGllbnRzIiwiYXVkIjoiY29tcGFueSIsImlhdCI6MTY3NTI1MDAyMSwiZXhwIjoxNjc1MzM2NDIxLCJhenAiOiJLSnZPbHpXQ1A4NzRzWDI2bFNERWxpQUFpb0NCa3pXMSIsInNjb3BlIjoicmVhZDpjb21wYW55IHdyaXRlOmNvbXBhbnkgdXBkYXRlOmNvbXBhbnkgZGVsZXRlOmNvbXBhbnkiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.cI82FEntTISmq6ZxQrIfdvkMstm-n0q8pH3LcCnS4EKuDLO_ygoGVWZ6UJ4pNPlRke7y66YFpp80Jp-OQJECK2JqykjNs3SrFDgfq5D-kaA3lWYCHGlvvvwqRpBOM_KcHrXxex24eaKjuFfMa5dBZDrmZ3LPTPYZgzA9fG_6l_9fEIQdAnP2CXAL8oIGql26iZQovJPWidaMUNvC4p3vdstGfuroWAaWyuILe0LJg9-0xly3QWUywMCVZrBAQQGvk98FikCV_yEZG06QSoox2RtcY-qTwAA6qVpPeukVGeXTz9uoWI7nsRlV8Zvwh5KjoU-ROezPcDh1oFaTj9VTOA",
+			"type": "string"
+		}
+	]
+}

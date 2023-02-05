@@ -11,6 +11,8 @@ public class ProjectResponseModel {
 
     private List<TaskResponseModel> tasks;
 
+    private long companyId;
+
     public Long getId() {
         return id;
     }
@@ -41,5 +43,13 @@ public class ProjectResponseModel {
 
     public void setTasks(List<TaskResponseModel> tasks) {
         this.tasks = tasks;
+    }
+
+    public long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(long companyId) {
+        this.companyId = companyId;
     }
 }
