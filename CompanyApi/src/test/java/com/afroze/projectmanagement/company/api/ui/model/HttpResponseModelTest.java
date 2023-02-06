@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class HttpResponseModelTest {
     @Test
     void success_returnsStatusAndData() {
-        HttpResponseModel<String> sut = HttpResponseModel.Success("data");
+        HttpResponseModel<String> sut = HttpResponseModel.success("data");
 
         assertEquals("data", sut.getData());
         assertFalse(sut.isError());
@@ -16,7 +16,7 @@ class HttpResponseModelTest {
 
     @Test
     void failure_returnsStatusAndError() {
-        HttpResponseModel<String> sut = HttpResponseModel.Failure("failure", "error");
+        HttpResponseModel<String> sut = HttpResponseModel.failure("failure", "error");
 
         assertEquals("failure", sut.getData());
         assertTrue(sut.isError());

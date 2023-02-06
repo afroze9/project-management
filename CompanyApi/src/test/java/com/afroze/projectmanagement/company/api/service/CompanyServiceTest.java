@@ -107,6 +107,6 @@ class CompanyServiceTest {
     @Test
     void delete_runs() {
         Mockito.when(companyRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(getCompany()));
-        companyService.delete(1L);
+        assertDoesNotThrow(() ->companyService.delete(1L));
     }
 }

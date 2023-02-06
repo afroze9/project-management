@@ -41,12 +41,12 @@ public class CompanyController {
     @Operation(summary = "Get Companies", security = @SecurityRequirement(name="bearerAuth"))
     public ResponseEntity<HttpResponseModel<List<CompanyResponseModel>>> getAll() {
         List<CompanyDto> companies = companyService.getAll();
-        if(companies.size() == 0) {
+        if(companies.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         List<CompanyResponseModel> response = mapper.map(companies, new TypeToken<List<CompanyResponseModel>>(){}.getType());
-        return ResponseEntity.status(HttpStatus.OK).body(HttpResponseModel.Success(response));
+        return ResponseEntity.status(HttpStatus.OK).body(HttpResponseModel.success(response));
     }
 
     @GetMapping("/{companyId}/")
@@ -55,9 +55,9 @@ public class CompanyController {
         try {
             CompanyDto company = companyService.getById(companyId);
             CompanyResponseModel response = mapper.map(company, CompanyResponseModel.class);
-            return ResponseEntity.status(HttpStatus.OK).body(HttpResponseModel.Success(response));
+            return ResponseEntity.status(HttpStatus.OK).body(HttpResponseModel.success(response));
         } catch (CompanyNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpResponseModel.Failure(null, e.getLocalizedMessage()));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpResponseModel.failure(null, e.getLocalizedMessage()));
         }
     }
 
@@ -68,9 +68,9 @@ public class CompanyController {
         try {
             CompanyDto createdCompany = companyService.create(dto);
             CompanyResponseModel response = mapper.map(createdCompany, CompanyResponseModel.class);
-            return ResponseEntity.status(HttpStatus.CREATED).body(HttpResponseModel.Success(response));
+            return ResponseEntity.status(HttpStatus.CREATED).body(HttpResponseModel.success(response));
         } catch (CompanyAlreadyExistsException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(HttpResponseModel.Failure(null, e.getLocalizedMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(HttpResponseModel.failure(null, e.getLocalizedMessage()));
         }
     }
 
@@ -83,9 +83,9 @@ public class CompanyController {
         try {
             CompanyDto updatedCompany = companyService.update(companyId, dto);
             CompanyResponseModel response = mapper.map(updatedCompany, CompanyResponseModel.class);
-            return ResponseEntity.status(HttpStatus.OK).body(HttpResponseModel.Success(response));
+            return ResponseEntity.status(HttpStatus.OK).body(HttpResponseModel.success(response));
         } catch (CompanyNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(HttpResponseModel.Failure(null, e.getLocalizedMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(HttpResponseModel.failure(null, e.getLocalizedMessage()));
         }
     }
 

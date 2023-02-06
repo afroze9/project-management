@@ -23,11 +23,11 @@ public class HttpResponseModel<T> {
         this.errorMessage = errorMessage;
     }
 
-    public static <T> HttpResponseModel<T> Success(T data) {
+    public static <T> HttpResponseModel<T> success(T data) {
         return new HttpResponseModel<>(data, false, "");
     }
 
-    public static <T> HttpResponseModel<T> Failure(T data, String errorMessage) {
+    public static <T> HttpResponseModel<T> failure(T data, String errorMessage) {
         return new HttpResponseModel<>(data, true, errorMessage);
     }
 }
